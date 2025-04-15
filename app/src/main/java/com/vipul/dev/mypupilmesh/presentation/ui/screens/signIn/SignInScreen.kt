@@ -107,7 +107,7 @@ fun SignInScreen(navController: NavController?, viewModel: SignInViewModel = hil
                     IconButton(onClick = {
                         Toast.makeText(context, "Work on progress", Toast.LENGTH_SHORT).show()
                     }) {
-                        
+
                         Icon(
                             painter = painterResource(R.drawable.google),
                             contentDescription = "Google",
@@ -136,17 +136,16 @@ fun SignInScreen(navController: NavController?, viewModel: SignInViewModel = hil
                 Spacer(modifier = Modifier.height(16.dp))
 
                 OutlinedTextField(
-                    value = state.email,
-                    onValueChange = { newTxt ->
-                        viewModel::onEmailChange
-                        viewModel.resetError()},
-                    label = { Text("Email") },
-                    colors = OutlinedTextFieldDefaults.colors(
-                        focusedLabelColor = Color.LightGray,
-                        disabledLabelColor = Color.Gray,
-                        unfocusedLabelColor = Color.Gray
-                    ),
-                    modifier = Modifier.fillMaxWidth()
+                    value = state.email, onValueChange = { newTxt ->
+                    viewModel.onEmailChange(newTxt)
+                    viewModel.resetError()
+                }, label = { Text("Email") }, colors = OutlinedTextFieldDefaults.colors(
+                    focusedLabelColor = Color.LightGray,
+                    disabledLabelColor = Color.Gray,
+                    unfocusedLabelColor = Color.Gray,
+                    focusedTextColor = Color.White,
+                    unfocusedTextColor = Color.White
+                ), modifier = Modifier.fillMaxWidth()
                 )
 
                 Spacer(modifier = Modifier.height(16.dp))
@@ -155,12 +154,15 @@ fun SignInScreen(navController: NavController?, viewModel: SignInViewModel = hil
                     modifier = Modifier.fillMaxWidth(),
                     value = state.password,
                     onValueChange = { newTxt ->
-                        viewModel::onPasswordChange
+                        viewModel.onPasswordChange(newTxt)
                         viewModel.resetError()
                     },
-                    visualTransformation = if(passwordVisible) VisualTransformation.None else PasswordVisualTransformation(),
+                    visualTransformation = if (passwordVisible) VisualTransformation.None else PasswordVisualTransformation(),
                     trailingIcon = {
-                        val icon = if (passwordVisible) painterResource(R.drawable.ic_visibility) else painterResource(R.drawable.ic_visibility_off)
+                        val icon =
+                            if (passwordVisible) painterResource(R.drawable.ic_visibility) else painterResource(
+                                R.drawable.ic_visibility_off
+                            )
                         IconButton(onClick = { passwordVisible = !passwordVisible }) {
                             Icon(
                                 painter = icon, contentDescription = "Toggle button"
@@ -171,7 +173,9 @@ fun SignInScreen(navController: NavController?, viewModel: SignInViewModel = hil
                     colors = OutlinedTextFieldDefaults.colors(
                         focusedLabelColor = Color.LightGray,
                         disabledLabelColor = Color.Gray,
-                        unfocusedLabelColor = Color.Gray
+                        unfocusedLabelColor = Color.Gray,
+                        focusedTextColor = Color.White,
+                        unfocusedTextColor = Color.White
                     ),
                 )
 
@@ -234,7 +238,7 @@ fun SignInScreen(navController: NavController?, viewModel: SignInViewModel = hil
                     text = annotatedText,
                     style = MaterialTheme.typography.bodyMedium,
                     color = Color.Gray,
-                    onTextLayout = {result->textLayoutResult=result},
+                    onTextLayout = { result -> textLayoutResult = result },
                     modifier = Modifier
                         .padding(top = 16.dp)
                         .clickable(false) {}
@@ -243,14 +247,11 @@ fun SignInScreen(navController: NavController?, viewModel: SignInViewModel = hil
                                 textLayoutResult?.let { layout ->
                                     val position = layout.getOffsetForPosition(offset)
                                     annotatedText.getStringAnnotations(
-                                        start = position,
-                                        end = position
+                                        start = position, end = position
                                     ).firstOrNull()?.let { annotation ->
                                         if (annotation.tag == "SIGN_UP") {
                                             Toast.makeText(
-                                                context,
-                                                "Sign Up clicked",
-                                                Toast.LENGTH_SHORT
+                                                context, "Sign Up clicked", Toast.LENGTH_SHORT
                                             ).show()
                                         }
                                     }

@@ -4,6 +4,15 @@ plugins {
     alias(libs.plugins.kotlin.compose)
     id("kotlin-kapt")
     id("com.google.dagger.hilt.android")
+    id("org.jetbrains.kotlin.plugin.serialization")
+
+
+//    dependencies {
+//        // ... other dependencies
+//
+//        // Kotlinx.serialization
+//        implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.3") // Check for the latest version
+//    }
 
 }
 
@@ -25,8 +34,7 @@ android {
         release {
             isMinifyEnabled = false
             proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
+                getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
             )
         }
     }
@@ -60,7 +68,7 @@ dependencies {
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
 
-    
+
 
     implementation("androidx.navigation:navigation-compose:2.8.9")
 
@@ -74,13 +82,14 @@ dependencies {
 
 
     // Room
-    implementation("androidx.room:room-runtime:2.6.1") // Check for the latest version
-    kapt("androidx.room:room-compiler:2.6.1") // Check for the latest version
+    implementation("androidx.room:room-runtime:2.6.1") 
+    kapt("androidx.room:room-compiler:2.6.1")
 
     // optional - Kotlin Extensions and Coroutines support for Room
-    implementation("androidx.room:room-ktx:2.6.1") // Check for the latest version
+    implementation("androidx.room:room-ktx:2.6.1")
 
     // DataStore Preferences
-    implementation("androidx.datastore:datastore-preferences:1.1.0-rc01") //check latest version
+    implementation("androidx.datastore:datastore-preferences:1.1.0-rc01")
 
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.3")
 }
