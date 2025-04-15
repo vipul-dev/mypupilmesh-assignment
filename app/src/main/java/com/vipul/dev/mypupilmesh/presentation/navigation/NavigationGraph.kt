@@ -1,9 +1,11 @@
 package com.vipul.dev.mypupilmesh.presentation.navigation
 
+import kotlinx.serialization.Serializable
+
 
 sealed interface AuthDest{
 
-//    @Serializable
+    @Serializable
     data object SignInScreen: AuthDest
 
 }
