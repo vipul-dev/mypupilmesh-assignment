@@ -89,7 +89,7 @@ dependencies {
     implementation("androidx.room:room-ktx:2.6.1")
 
     // DataStore Preferences
-    implementation("androidx.datastore:datastore-preferences:1.1.0-rc01")
+    implementation("androidx.datastore:datastore-preferences:1.0.0")
 
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.3")
 }

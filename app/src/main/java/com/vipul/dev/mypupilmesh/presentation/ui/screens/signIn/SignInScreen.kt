@@ -16,6 +16,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -41,6 +43,8 @@ import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.TextLayoutResult
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextDecoration
@@ -51,6 +55,8 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.vipul.dev.mypupilmesh.R
+import com.vipul.dev.mypupilmesh.presentation.navigation.AuthDest
+import com.vipul.dev.mypupilmesh.presentation.navigation.DashboardDest
 
 @Composable
 fun SignInScreen(navController: NavController?, viewModel: SignInViewModel = hiltViewModel()) {
@@ -136,16 +142,24 @@ fun SignInScreen(navController: NavController?, viewModel: SignInViewModel = hil
                 Spacer(modifier = Modifier.height(16.dp))
 
                 OutlinedTextField(
-                    value = state.email, onValueChange = { newTxt ->
-                    viewModel.onEmailChange(newTxt)
-                    viewModel.resetError()
-                }, label = { Text("Email") }, colors = OutlinedTextFieldDefaults.colors(
-                    focusedLabelColor = Color.LightGray,
-                    disabledLabelColor = Color.Gray,
-                    unfocusedLabelColor = Color.Gray,
-                    focusedTextColor = Color.White,
-                    unfocusedTextColor = Color.White
-                ), modifier = Modifier.fillMaxWidth()
+                    value = state.email,
+                    onValueChange = { newTxt ->
+                        viewModel.onEmailChange(newTxt)
+                        viewModel.resetError()
+                    },
+                    label = { Text("Email") },
+                    colors = OutlinedTextFieldDefaults.colors(
+                        focusedLabelColor = Color.LightGray,
+                        disabledLabelColor = Color.Gray,
+                        unfocusedLabelColor = Color.Gray,
+                        focusedTextColor = Color.White,
+                        unfocusedTextColor = Color.White
+                    ),
+                    modifier = Modifier.fillMaxWidth(),
+                    singleLine = true,
+                    keyboardOptions = KeyboardOptions(
+                        imeAction = ImeAction.Next, keyboardType = KeyboardType.Email
+                    )
                 )
 
                 Spacer(modifier = Modifier.height(16.dp))
@@ -169,6 +183,10 @@ fun SignInScreen(navController: NavController?, viewModel: SignInViewModel = hil
                             )
                         }
                     },
+                    singleLine = true,
+                    keyboardOptions = KeyboardOptions(
+                        imeAction = ImeAction.Done, keyboardType = KeyboardType.Password
+                    ),
                     label = { Text("Password") },
                     colors = OutlinedTextFieldDefaults.colors(
                         focusedLabelColor = Color.LightGray,
@@ -259,6 +277,33 @@ fun SignInScreen(navController: NavController?, viewModel: SignInViewModel = hil
                             }
                         })
 
+            }
+        }
+    }
+
+    if (state.isSignedIn){
+        navController?.navigate(DashboardDest.DashboardScreen){
+            popUpTo(AuthDest.SignInScreen){
+                inclusive=true
+            }
+        }
+    }
+
+    if (state.showUserExistDialog) {
+        /*AlertDialog(
+            onDismissRequest = { viewModel.dismissUserExistDialog() },
+            title = { Text("User Already Exists") },
+            text = { Text("User with this email already exists. Please sign in.") },
+            confirmButton = {
+                Button(onClick = { viewModel.dismissUserExistDialog() }) {
+                    Text("OK")
+                }
+
+            })*/
+
+        navController?.navigate(DashboardDest.DashboardScreen){
+            popUpTo(AuthDest.SignInScreen){
+                inclusive=true
             }
         }
     }
