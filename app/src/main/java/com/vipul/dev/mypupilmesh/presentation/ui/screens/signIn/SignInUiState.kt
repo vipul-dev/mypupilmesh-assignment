@@ -5,5 +5,6 @@ data class SignInUiState(
     val password: String = "",
     val isLoading: Boolean = false,
     val isSignedIn: Boolean = false,
-    val error: String? = null
+    val error: String? = null,
+    val showUserExistDialog: Boolean = false
 )

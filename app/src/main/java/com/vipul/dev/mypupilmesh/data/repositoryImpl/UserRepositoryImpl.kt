@@ -15,4 +15,8 @@ class UserRepositoryImpl @Inject constructor(private val userDao:UserDao): UserR
     override suspend fun getUserByEmail(email: String): UserEntity? {
        return userDao.getUserByEmail(email)
     }
+
+    override suspend fun userExists(email: String): Boolean {
+        return userDao.getUserByEmail(email) != null
+    }
 }
