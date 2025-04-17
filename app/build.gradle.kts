@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
     id("kotlin-kapt")
+    id("kotlin-parcelize")
     id("com.google.dagger.hilt.android")
     id("org.jetbrains.kotlin.plugin.serialization")
 
@@ -28,6 +29,12 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        kapt{
+            arguments {
+                arg("room.schemaLocation","$projectDir/schemas")
+            }
+        }
     }
 
     buildTypes {
@@ -92,4 +99,16 @@ dependencies {
     implementation("androidx.datastore:datastore-preferences:1.0.0")
 
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.3")
+
+    //Retrofit
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+
+    //Gson converter
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+
+    // Okhttp (for logging)
+    implementation("com.squareup.okhttp3:logging-interceptor:4.10.0")
+
+    // coil for network image
+    implementation("io.coil-kt:coil-compose:2.4.0")
 }

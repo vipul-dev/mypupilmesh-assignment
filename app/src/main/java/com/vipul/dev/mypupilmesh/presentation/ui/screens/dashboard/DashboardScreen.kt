@@ -11,33 +11,23 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.navigation.NavController
-import androidx.navigation.NavHostController
-import androidx.navigation.NavType
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import androidx.navigation.navArgument
-import com.vipul.dev.mypupilmesh.presentation.navigation.FaceRecognitionDest
-import com.vipul.dev.mypupilmesh.presentation.navigation.MangaDest
 import com.vipul.dev.mypupilmesh.presentation.ui.screens.face.FaceRecognitionScreen
 import com.vipul.dev.mypupilmesh.presentation.ui.screens.manga.mangaDetails.MangaDetailsScreen
 import com.vipul.dev.mypupilmesh.presentation.ui.screens.manga.mangaGridList.MangaListScreen
+import com.vipul.dev.mypupilmesh.presentation.utils.SharedViewModel
 import com.vipul.dev.mypupilmesh.presentation.utils.navItems
-import com.vipul.dev.mypupilmesh.presentation.utils.toRoute
-import kotlinx.serialization.Serializable
 
-@Serializable
-data class NavItem(
-    val label: String,
-    val route: String
-)
 
 @Composable
 fun DashboardScreen() {
 
     val navController = rememberNavController()
+    val viewModel : SharedViewModel = hiltViewModel()
 
     val currentBackStackEntry by navController!!.currentBackStackEntryAsState()
     val currentRoute = currentBackStackEntry?.destination?.route
@@ -61,11 +51,8 @@ fun DashboardScreen() {
                         icon = { Box {} })
                 }
             }
-        },
+        }, containerColor = Color.Black
     ) { innerPadding ->
-//        when (selectedItem) {
-//            0 -> MangaScreen(navController, innerPadding)
-//            1 -> FaceScreen(navController, innerPadding)
 
         NavHost(
             navController = navController!!,
@@ -74,19 +61,19 @@ fun DashboardScreen() {
         ) {
 
             composable("manga") {
-                MangaListScreen(){id->
-                    navController.navigate("manga_details?id=${id}")
+                MangaListScreen { manga ->
+                    viewModel.setSelectedMangaData(manga)
+                    navController.navigate("manga_details")
                 }
             }
 
-            composable("manga_details?id={id}", arguments = listOf(
-                navArgument("id") {
-                    type = NavType.IntType
-                    nullable=false
+            composable(
+                "manga_details"
+            ) {
+                val mangaData = viewModel.selectedMangaData.value
+                MangaDetailsScreen(mangaData){
+                    navController.navigateUp()
                 }
-            )) {backstackEntry->
-                val id  = backstackEntry.arguments?.getInt("id")
-                MangaDetailsScreen(mangaId = id)
             }
 
             composable("face") {
