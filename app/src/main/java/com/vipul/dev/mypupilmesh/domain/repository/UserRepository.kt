@@ -1,6 +1,6 @@
 package com.vipul.dev.mypupilmesh.domain.repository
 
-import com.vipul.dev.mypupilmesh.data.local.UserEntity
+import com.vipul.dev.mypupilmesh.data.local.entity.UserEntity
 
 interface UserRepository {
     suspend fun saveUser(email: String,password: String)
