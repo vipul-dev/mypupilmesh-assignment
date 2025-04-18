@@ -71,59 +71,59 @@ dependencies {
 
 
 
-    implementation("androidx.navigation:navigation-compose:2.8.9")
+    implementation(libs.androidx.navigation)
 
     // Hilt
-    implementation("com.google.dagger:hilt-android:2.51.1")
-    kapt("com.google.dagger:hilt-compiler:2.51.1")
+    implementation(libs.android.hilt)
+    kapt(libs.android.hilt.compiler)
 
 
     // Hilt ViewModel support (if needed)
-    implementation("androidx.hilt:hilt-navigation-compose:1.2.0")
+    implementation(libs.android.hilt.navigation.compose)
 
 
     // Room
-    implementation("androidx.room:room-runtime:2.6.1") 
-    kapt("androidx.room:room-compiler:2.6.1")
+    implementation(libs.android.room.runtime)
+    kapt(libs.android.room.compiler)
 
     // optional - Kotlin Extensions and Coroutines support for Room
-    implementation("androidx.room:room-ktx:2.6.1")
+    implementation(libs.android.room.ktx)
 
     // DataStore Preferences
-    implementation("androidx.datastore:datastore-preferences:1.0.0")
+    implementation(libs.android.datastore.pref)
 
-    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.3")
+    implementation(libs.android.kotlin.serialization)
 
     //Retrofit
-    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation(libs.android.retrofit)
 
     //Gson converter
-    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+    implementation(libs.android.retrofit.gson.converter)
 
     // Okhttp (for logging)
-    implementation("com.squareup.okhttp3:logging-interceptor:4.10.0")
+    implementation(libs.android.okhttp.logging)
 
     // coil for network image
-    implementation("io.coil-kt:coil-compose:2.4.0")
+    implementation(libs.android.coil)
 
     // Camerax core library
-    implementation("androidx.camera:camera-core:1.4.2")
+    implementation(libs.android.camera.core)
 
     //CameraX Camera2 extensions
-    implementation("androidx.camera:camera-extensions:1.4.2")
-    implementation("androidx.camera:camera-camera2:1.4.2")
+    implementation(libs.android.camera.extensions)
+    implementation(libs.android.camera.camera2)
 
     //CameraX lifecycle library
-    implementation("androidx.camera:camera-lifecycle:1.4.2")
+    implementation(libs.android.camera.lifecycle)
 
     //CameraX view class
-    implementation("androidx.camera:camera-view:1.4.2")
-    implementation("androidx.compose.ui:ui-viewbinding:1.6.0")
+    implementation(libs.android.camera.view)
+    implementation(libs.android.compose.ui.viewbinding)
 
 
     // MediaPipe for face detection
-    implementation("com.google.mediapipe:tasks-vision:0.10.14")
+    implementation(libs.mediapipe.task.vision)
 
     // Permission library
-    implementation("com.google.accompanist:accompanist-permissions:0.34.0")
+    implementation(libs.permission.library)
 }

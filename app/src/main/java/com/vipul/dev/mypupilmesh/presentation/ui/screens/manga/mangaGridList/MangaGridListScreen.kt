@@ -60,7 +60,7 @@ fun MangaListScreen(
     }
 
 
-    if (isError.value) {
+    if (isError.value==true) {
         Toast.makeText(LocalContext.current, viewModel.error.value, Toast.LENGTH_LONG).show()
     }
 
