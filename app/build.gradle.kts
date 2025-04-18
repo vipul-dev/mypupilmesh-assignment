@@ -111,4 +111,23 @@ dependencies {
 
     // coil for network image
     implementation("io.coil-kt:coil-compose:2.4.0")
+
+    // Camerax core library
+    implementation("androidx.camera:camera-core:1.4.2")
+
+    //CameraX Camera2 extensions
+    implementation("androidx.camera:camera-extensions:1.4.2")
+    implementation("androidx.camera:camera-camera2:1.4.2")
+
+    //CameraX lifecycle library
+    implementation("androidx.camera:camera-lifecycle:1.4.2")
+
+    //CameraX view class
+    implementation("androidx.camera:camera-view:1.4.2")
+
+    // MediaPipe for face detection
+    implementation("com.google.mediapipe:tasks-vision:0.10.14")
+
+    // Permission library
+    implementation("com.google.accompanist:accompanist-permissions:0.34.0")
 }
