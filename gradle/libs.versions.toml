@@ -11,7 +11,13 @@ composeBom = "2024.09.00"
 androidxNavigation = "2.8.9"
 hiltAndroid="2.51.1"
 hiltNavigationCompose="1.2.0"
-roomAndroid="2.6.1"
+roomAndroid="2.7.0"
+dataStorePref="1.0.0"
+kotlionSerialization="1.6.3"
+retrofit="2.9.0"
+okhttpClient="4.10.0"
+coil="2.4.0"
+cameraCore="1.4.2"
 
 
 [libraries]
@@ -30,57 +36,28 @@ androidx-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-man
 androidx-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
 androidx-material3 = { group = "androidx.compose.material3", name = "material3" }
 
-#androidx-navigation = { group = "androidx.navigation", name = "navigation-compose", version.ref = "androidxNavigation" }
-#android-hilt = { group = "com.google.dagger", name = "hilt-android", version.ref = "hiltAndroid" }
-#android-hilt-compiler = { group = "com.google.dagger", name = "hilt-compiler", version.ref = "hiltAndroid" }
-#android-hilt-navigation-compose = { group = "androidx.hilt", name = "hilt-navigation-compose", version.ref = "hiltNavigationCompose" }
-#
-#
-#
-#// Room
-#implementation("androidx.room:room-runtime:2.6.1")
-#kapt("androidx.room:room-compiler:2.6.1")
-#
-#// optional - Kotlin Extensions and Coroutines support for Room
-#implementation("androidx.room:room-ktx:2.6.1")
-#
-#// DataStore Preferences
-#implementation("androidx.datastore:datastore-preferences:1.0.0")
-#
-#implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.3")
-#
-#//Retrofit
-#implementation("com.squareup.retrofit2:retrofit:2.9.0")
-#
-#//Gson converter
-#implementation("com.squareup.retrofit2:converter-gson:2.9.0")
-#
-#// Okhttp (for logging)
-#implementation("com.squareup.okhttp3:logging-interceptor:4.10.0")
-#
-#// coil for network image
-#implementation("io.coil-kt:coil-compose:2.4.0")
-#
-#// Camerax core library
-#implementation("androidx.camera:camera-core:1.4.2")
-#
-#//CameraX Camera2 extensions
-#implementation("androidx.camera:camera-extensions:1.4.2")
-#implementation("androidx.camera:camera-camera2:1.4.2")
-#
-#//CameraX lifecycle library
-#implementation("androidx.camera:camera-lifecycle:1.4.2")
-#
-#//CameraX view class
-#implementation("androidx.camera:camera-view:1.4.2")
-#implementation("androidx.compose.ui:ui-viewbinding:1.6.0")
-#
-#
-#// MediaPipe for face detection
-#implementation("com.google.mediapipe:tasks-vision:0.10.14")
-#
-#// Permission library
-#implementation("com.google.accompanist:accompanist-permissions:0.34.0")
+androidx-navigation = { group = "androidx.navigation", name = "navigation-compose", version.ref = "androidxNavigation" }
+android-hilt = { group = "com.google.dagger", name = "hilt-android", version.ref = "hiltAndroid" }
+android-hilt-compiler = { group = "com.google.dagger", name = "hilt-compiler", version.ref = "hiltAndroid" }
+android-hilt-navigation-compose = { group = "androidx.hilt", name = "hilt-navigation-compose", version.ref = "hiltNavigationCompose" }
+android-room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "roomAndroid" }
+android-room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "roomAndroid" }
+android-room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "roomAndroid" }
+android-datastore-pref = { group = "androidx.datastore", name = "datastore-preferences", version.ref = "dataStorePref" }
+android-kotlin-serialization = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlionSerialization" }
+android-retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
+android-retrofit-gson-converter = { group = "com.squareup.retrofit2", name = "converter-gson", version.ref = "retrofit" }
+android-okhttp-logging = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "okhttpClient" }
+android-coil = { group = "io.coil-kt", name = "coil-compose", version.ref = "coil" }
+android-camera-core = { group = "androidx.camera", name = "camera-core", version.ref = "cameraCore" }
+android-camera-extensions = { group = "androidx.camera", name = "camera-extensions", version.ref = "cameraCore" }
+android-camera-camera2 = { group = "androidx.camera", name = "camera-camera2", version.ref = "cameraCore" }
+android-camera-lifecycle = { group = "androidx.camera", name = "camera-lifecycle", version.ref = "cameraCore" }
+android-camera-view = { group = "androidx.camera", name = "camera-view", version.ref = "cameraCore" }
+android-compose-ui-viewbinding = { group = "androidx.compose.ui", name = "ui-viewbinding", version = "1.6.0" }
+mediapipe-task-vision = { group = "com.google.mediapipe", name = "tasks-vision", version = "0.10.14" }
+permission-library = { group = "com.google.accompanist", name = "accompanist-permissions", version = "0.34.0" }
+
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
