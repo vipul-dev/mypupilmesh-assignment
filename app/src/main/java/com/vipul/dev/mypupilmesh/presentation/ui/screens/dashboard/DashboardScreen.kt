@@ -1,16 +1,28 @@
 package com.vipul.dev.mypupilmesh.presentation.ui.screens.dashboard
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarColors
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -23,6 +35,7 @@ import com.vipul.dev.mypupilmesh.presentation.utils.SharedViewModel
 import com.vipul.dev.mypupilmesh.presentation.utils.navItems
 
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DashboardScreen() {
 
@@ -34,10 +47,41 @@ fun DashboardScreen() {
 
 
     Scaffold(
+        topBar = {
+            TopAppBar(
+                expandedHeight = 50.dp,
+                title = {
+                    Text(
+                        text = when(currentRoute){
+                            "manga"-> "Manga"
+                            "manga_details"-> "Manga Details"
+                            "face" -> "Face Recognition"
+                            else -> "Manga"
+                        },
+                        /*color = Color.White*/
+                    )
+                },
+                colors = TopAppBarDefaults.topAppBarColors(
+                    containerColor = Color.Black,
+                    navigationIconContentColor = Color.White,
+                    titleContentColor = Color.White,
+                ),
+                navigationIcon = {
+                    if (currentRoute != "manga"){
+                        IconButton(onClick = {
+                            navController.navigateUp()
+                        }) {
+                            Icon(Icons.Default.ArrowBack, contentDescription = "navigation"/*,tint=Color.White*/)
+                        }
+                    }
+                }
+            )
+        },
         bottomBar = {
             NavigationBar(containerColor = Color(0xFF1E1E1E), contentColor = Color.White) {
                 navItems.forEachIndexed { index, item ->
                     NavigationBarItem(
+                        alwaysShowLabel = true,
                         label = { Text(text = item.label, color = Color.White) },
                         selected = currentRoute == item.route,
                         onClick = {
@@ -45,6 +89,7 @@ fun DashboardScreen() {
                                 navController.navigate(item.route) {
                                     popUpTo("manga") { inclusive = false }
                                     launchSingleTop = true
+                                    restoreState=true
                                 }
                             }
                         },
@@ -71,9 +116,7 @@ fun DashboardScreen() {
                 "manga_details"
             ) {
                 val mangaData = viewModel.selectedMangaData.value
-                MangaDetailsScreen(mangaData){
-                    navController.navigateUp()
-                }
+                MangaDetailsScreen(mangaData)
             }
 
             composable("face") {

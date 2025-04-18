@@ -1,5 +1,6 @@
 package com.vipul.dev.mypupilmesh.presentation.ui.screens.manga.mangaGridList
 
+import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -48,6 +49,7 @@ fun MangaListScreen(
     val isLoading = viewModel.isLoading.collectAsState()
     val listState = rememberLazyListState()
     val isConnected = viewModel.isConnected.collectAsState()
+    val isError = viewModel.isError.collectAsState()
 
 
     remember {
@@ -58,6 +60,9 @@ fun MangaListScreen(
     }
 
 
+    if (isError.value) {
+        Toast.makeText(LocalContext.current, viewModel.error.value, Toast.LENGTH_LONG).show()
+    }
 
     if (isLoading.value) {
         Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
@@ -68,7 +73,9 @@ fun MangaListScreen(
         Column {
             if (!isConnected.value) {
                 Box(
-                    modifier = Modifier.fillMaxWidth().background(Color.DarkGray),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .background(Color.DarkGray),
                     contentAlignment = Alignment.Center
                 ) {
                     Text(
@@ -78,7 +85,8 @@ fun MangaListScreen(
                         text = "Offline mode",
                         color = Color.Red,
                         textAlign = TextAlign.Center,
-                        style = MaterialTheme.typography.titleLarge)
+                        style = MaterialTheme.typography.titleLarge
+                    )
                 }
             }
 
