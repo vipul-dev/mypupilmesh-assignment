@@ -4,7 +4,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.vipul.dev.mypupilmesh.presentation.ui.screens.face.camera.CameraPermissionWrapper
 import com.vipul.dev.mypupilmesh.presentation.ui.screens.face.camera.CameraPreviewScreen
-import com.vipul.dev.mypupilmesh.presentation.ui.screens.face.camera.CameraScreen
 
 @Composable
 fun FaceRecognitionScreen(modifier: Modifier = Modifier) {
