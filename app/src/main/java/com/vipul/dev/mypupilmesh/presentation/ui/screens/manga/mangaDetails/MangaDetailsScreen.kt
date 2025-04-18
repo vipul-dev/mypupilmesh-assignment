@@ -35,7 +35,7 @@ import com.vipul.dev.mypupilmesh.data.remote.model.MangaData
 
 @Composable
 fun MangaDetailsScreen(
-    mangaData: MangaData?, onNavigateUp: () -> Unit
+    mangaData: MangaData?
 ) {
 
     Column(
@@ -44,15 +44,6 @@ fun MangaDetailsScreen(
             .background(Color.Black)
             .padding(16.dp)
     ) {
-        Box(modifier = Modifier.fillMaxWidth().padding(top=16.dp, bottom = 16.dp)) {
-            Icon(
-                imageVector = Icons.Default.ArrowBack,
-                tint = Color.White,
-                contentDescription = null,
-                modifier = Modifier.clickable {
-                    onNavigateUp()
-                })
-        }
 
         Row(
             modifier = Modifier.fillMaxWidth(),
@@ -118,7 +109,5 @@ fun MangaDetailsScreen(
 @Composable
 @Preview(showBackground = true)
 fun PreviewMangaDetailScreen() {
-    MangaDetailsScreen(null){
-
-    }
+    MangaDetailsScreen(null)
 }

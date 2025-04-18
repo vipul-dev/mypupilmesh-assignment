@@ -8,12 +8,6 @@ plugins {
     id("org.jetbrains.kotlin.plugin.serialization")
 
 
-//    dependencies {
-//        // ... other dependencies
-//
-//        // Kotlinx.serialization
-//        implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.3") // Check for the latest version
-//    }
 
 }
 
@@ -124,6 +118,8 @@ dependencies {
 
     //CameraX view class
     implementation("androidx.camera:camera-view:1.4.2")
+    implementation("androidx.compose.ui:ui-viewbinding:1.6.0")
+
 
     // MediaPipe for face detection
     implementation("com.google.mediapipe:tasks-vision:0.10.14")

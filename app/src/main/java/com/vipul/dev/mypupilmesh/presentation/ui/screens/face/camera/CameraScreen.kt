@@ -1,6 +1,8 @@
 package com.vipul.dev.mypupilmesh.presentation.ui.screens.face.camera
 
 import android.content.Context
+import android.view.ViewGroup
+import android.view.ViewGroup.LayoutParams.MATCH_PARENT
 import androidx.camera.core.CameraSelector
 import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
@@ -17,17 +19,23 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.compose.LocalLifecycleOwner
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.suspendCancellableCoroutine
 import kotlinx.coroutines.withContext
 
 @Composable
-fun CameraScreen(modifier: Modifier = Modifier) {
+fun CameraScreen(previewView: PreviewView, context: Context, lifecycleOwner: LifecycleOwner) {
 
     val context = LocalContext.current
     val lifecycleOwner = LocalLifecycleOwner.current
-    val previewView = remember { PreviewView(context) }
+    val previewView = remember {
+        PreviewView(context).apply {
+            layoutParams = ViewGroup.LayoutParams(MATCH_PARENT, MATCH_PARENT)
+            scaleType = PreviewView.ScaleType.FILL_CENTER
+        }
+    }
 
     var cameraProvider: ProcessCameraProvider? by remember { mutableStateOf(null) }
 
@@ -37,7 +45,8 @@ fun CameraScreen(modifier: Modifier = Modifier) {
             it.setSurfaceProvider { previewView.surfaceProvider }
         }
 
-        val cameraSelector = CameraSelector.DEFAULT_FRONT_CAMERA
+        val cameraSelector =
+            CameraSelector.Builder().requireLensFacing(CameraSelector.LENS_FACING_FRONT).build()
 
         try {
             cameraProvider?.unbindAll()
@@ -56,7 +65,9 @@ fun CameraScreen(modifier: Modifier = Modifier) {
         }
     }
 
-    AndroidView(factory = { previewView }, modifier = Modifier.fillMaxSize())
+    AndroidView(factory = { previewView }, modifier = Modifier.fillMaxSize(), update = {
+
+    })
 
 }
 
@@ -67,7 +78,7 @@ suspend fun getCameraProvider(context: Context): ProcessCameraProvider =
             future.addListener({
                 try {
                     continuation.resume(future.get(), null)
-                }catch (e: Exception){
+                } catch (e: Exception) {
                     continuation.cancel(e)
                 }
             }, ContextCompat.getMainExecutor(context))
